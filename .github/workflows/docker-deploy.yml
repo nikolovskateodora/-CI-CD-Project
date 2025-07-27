@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/f1djangoapp:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/f1djangoapp:latest .
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/f1djangoapp:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/f1djangoapp:latest
