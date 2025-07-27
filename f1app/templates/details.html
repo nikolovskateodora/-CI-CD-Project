@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ constructor.name }} Drivers</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #000000, #1f1f1f, #000000);
+            color: #ffffff;
+            min-height: 100vh;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .card {
+            background-color: #ffffff0d;
+            border: 1px solid #ffffff22;
+            backdrop-filter: blur(6px);
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-img-top {
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-weight: bold;
+            text-shadow: 2px 2px #000;
+        }
+
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container-fluid" style="margin-bottom: 0px">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3 shadow-sm" style="padding-left: 130px; padding-right: 130px; background: linear-gradient(to right, #000000, #1f1f1f, #000000);">
+    <div class="container"  style="padding-bottom: 10px">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+            <img src="{% static 'images/img.png' %}" alt="F1 Logo" style="height: 32px; margin-right: 10px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav" style="font-size: 18px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Constructors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="padding-left: 30px;" href="{% url 'drivers' %}">Drivers</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+<div class="container mt-4" style="padding-top: 100px">
+    <h2 class="mb-4 text-center">{{ constructor.name }} Drivers</h2>
+
+    {% if drivers %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for driver in drivers %}
+        <div class="col">
+            <div class="card h-100 shadow">
+                {% if driver.driver_photo %}
+                <img src="{{ driver.driver_photo.url }}" class="card-img-top" alt="{{ driver.first_name }} {{ driver.last_name }}">
+                {% endif %}
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title text-uppercase fw-semibold">{{ driver.first_name }} {{ driver.last_name }}</h5>
+                        <hr style="border-color: rgba(255,255,255,0.2);">
+                        <p class="card-text mb-1"><strong>Number:</strong> <span class="text-light">{{ driver.driver_number }}</span></p>
+                        <p class="card-text mb-1"><strong>Career Points:</strong> <span class="text-light">{{ driver.career_points }}</span></p>
+                        <p class="card-text mb-1"><strong>Championships:</strong> <span class="text-light">{{ driver.world_championships }}</span></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No drivers found for this constructor.</p>
+    {% endif %}
+</div>
+<footer class=" text-light py-3" style="padding-left: 130px; padding-right: 130px; background: linear-gradient(to right, #000000, #1f1f1f, #000000);">
+    <div class="container">
+        <span class="mb-1" style="padding-right: 750px">&copy; 2025 Formula 1 Fan App. All rights reserved.</span>
+        <span class="mb-0">
+            <a href="{% url 'drivers' %}" class="text-decoration-none text-light">Drivers</a> |
+            <a href="{% url 'index' %}" class="text-decoration-none text-light">Constructors</a>
+        </span>
+    </div>
+</footer>
+</body>
+</html>
