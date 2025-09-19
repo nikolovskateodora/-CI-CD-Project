@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['f1.local', 'localhost', '127.0.0.1']
 
 
+CSRF_TRUSTED_ORIGINS = ['https://f1.local']
 
 # Application definition
 
