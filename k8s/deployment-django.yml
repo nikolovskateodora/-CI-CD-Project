@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: f1-django-app
+  namespace: f1project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: f1-django
+  template:
+    metadata:
+      labels:
+        app: f1-django
+    spec:
+      containers:
+      - name: f1-django-container
+        image: teodoranikolovska/f1djangoapp:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_NAME
+        - name: DATABASE_USER
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_USER
+        - name: DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_HOST
+        - name: DATABASE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_PORT
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: f1app-secret
+              key: DATABASE_PASSWORD

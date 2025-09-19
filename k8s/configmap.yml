@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: f1app-config
+  namespace: f1project
+data:
+  DJANGO_ALLOWED_HOSTS: "f1.local,localhost,127.0.0.1"
+  DJANGO_CSRF_TRUSTED_ORIGINS: "https://f1.local"
+  DEBUG: "1"
+  DATABASE_NAME: "f1db"
+  DATABASE_USER: "postgres"
+  DATABASE_HOST: "f1-postgres"
+  DATABASE_PORT: "5432"
