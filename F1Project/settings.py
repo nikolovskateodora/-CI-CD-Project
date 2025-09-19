@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'f1db',
         'USER': 'postgres',
         'PASSWORD': 'Formula1Project2025!',
-        'HOST': 'db',
+        'HOST': 'f1-postgres',
         'PORT': '5432',
     }
 }
